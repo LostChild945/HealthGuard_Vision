@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [ "main", "develop" ]
   push:
-    branches: [ "develop", "featureLinter" ]
+    branches: [ "develop", "feature/Linter" ]
 
 jobs:
   lint:
