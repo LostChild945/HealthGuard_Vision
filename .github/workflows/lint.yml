@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [ "main", "develop" ]
   push:
-    branches: [ "develop","featurelinter" ]
+    branches: [ "develop", "featureLinter" ]
 jobs:
   zizmor:
     name: linter
