@@ -5,6 +5,10 @@ on:
   push:
     branches: [ "develop", "feature/Linter" ]
 
+defaults:
+  run:
+    working-directory: HealGuard
+
 jobs:
   eslint:
     runs-on: ubuntu-latest
