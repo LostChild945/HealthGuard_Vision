@@ -1,2 +1,5 @@
+.idea
+HealGuard/.env
+node_modules
 venv/
 .idea/
