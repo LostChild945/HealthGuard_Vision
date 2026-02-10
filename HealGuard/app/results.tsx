@@ -24,7 +24,7 @@ export default function ResultsScreen() {
           <CheckCircle size={64} color="#10b981" strokeWidth={2} />
         </View>
         <Text style={styles.title}>Analyse terminée</Text>
-        <Text style={styles.subtitle}>Voici les résultats de l'analyse</Text>
+        <Text style={styles.subtitle}>Voici les résultats de l&apos;analyse</Text>
       </View>
 
       <View style={styles.resultCard}>
