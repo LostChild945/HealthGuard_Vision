@@ -64,7 +64,7 @@ export default function GalleryScreen() {
           <ImageIcon size={64} color="#cbd5e1" strokeWidth={1.5} />
           <Text style={styles.emptyTitle}>Aucune photo</Text>
           <Text style={styles.emptyMessage}>
-            Prenez des photos pour commencer l'analyse
+            Prenez des photos pour commencer l&apos;analyse
           </Text>
         </View>
       </View>
