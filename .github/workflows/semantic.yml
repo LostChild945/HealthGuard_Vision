@@ -1,6 +1,7 @@
 name: semantic
 
 on:
+  workflow_dispatch:
   pull_request:
     types:
       - closed
