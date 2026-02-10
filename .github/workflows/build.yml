@@ -26,6 +26,6 @@ jobs:
 
       - name: Build React app
         working-directory: HealGuard
-        run: npm run build
+        run: npm run build:web
 
 
