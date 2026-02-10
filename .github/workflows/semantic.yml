@@ -2,7 +2,8 @@ name: semantic
 
 on:
   workflow_dispatch:
-  push: feature/semantic
+  push: 
+   branches: ["feature/semantic"]
   pull_request:
     types:
       - closed
