@@ -1,0 +1,37 @@
+name: semantic
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Release Version
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event.pull_request.merged == true }}
+    
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      
+      - name: Tag React Commit
+        id: tag-commit
+        uses: issue-ops/semver@vX.X.X
+        with:
+          manifest-path: react/package.json
+          workspace: ${{ github.workspace }}/react
+          ref: main
+     
+      - name: Print version
+        run: echo ${{ steps.tag-commit.outputs.version }}
+
+
+      
