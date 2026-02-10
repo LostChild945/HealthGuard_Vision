@@ -31,7 +31,7 @@ export default function GalleryScreen() {
     } catch (error) {
       console.error('Upload error:', error);
       if (Platform.OS !== 'web') {
-        Alert.alert('Erreur', "Impossible d'envoyer les photos. Vérifiez votre connexion.");
+        Alert.alert('Erreur', "Impossible d&apos;envoyer les photos. Vérifiez votre connexion.");
       }
     } finally {
       setLoading(false);

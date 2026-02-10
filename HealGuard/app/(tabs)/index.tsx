@@ -26,9 +26,9 @@ export default function CameraScreen() {
         <Camera size={64} color="#2563eb" strokeWidth={2} />
         <Text style={styles.title}>Accès à la caméra requis</Text>
         <Text style={styles.message}>
-          Cette application a besoin d'accéder à votre caméra pour prendre des photos
+          Cette application a besoin d&apos;accéder à votre caméra pour prendre des photos
         </Text>
-        <Button title="Autoriser l'accès" onPress={requestPermission} />
+        <Button title="Autoriser l&apos;accès" onPress={requestPermission} />
       </View>
     );
   }
