@@ -8,7 +8,10 @@ on:
     branches:
       - main
       - develop
-
+      
+permissions:
+  contents: write
+  
 jobs:
   release:
     name: Release Version
@@ -26,7 +29,7 @@ jobs:
       
       - name: Tag React Commit
         id: tag-commit
-        uses: issue-ops/semver@vX.X.X
+        uses: issue-ops/semver@v1.0.0
         with:
           manifest-path: react/package.json
           workspace: ${{ github.workspace }}/react
