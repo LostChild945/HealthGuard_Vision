@@ -1,0 +1,41 @@
+name: semantic
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+      
+permissions:
+  contents: write
+  
+jobs:
+  release:
+    name: Release Version
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event.pull_request.merged == true }}
+    
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      
+      - name: Tag React Commit
+        id: tag-commit
+        uses: issue-ops/semver@v1.0.0
+        with:
+          manifest-path: package.json
+          workspace: ${{ github.workspace }}/HealGuard
+          ref: main
+     
+      - name: Print version
+        run: echo ${{ steps.tag-commit.outputs.version }}
+
+
+      
