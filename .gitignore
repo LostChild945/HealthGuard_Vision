@@ -3,6 +3,9 @@ API/venv/
 .idea
 HealGuard/.env
 node_modules
-API/ML/data
-API/ML/.venv
+ML/data
+ML/.venv
 venv/
+ML/__pycache__
+ML/dataset/__pycache__
+.vscode
