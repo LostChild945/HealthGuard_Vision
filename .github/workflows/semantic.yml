@@ -32,7 +32,7 @@ jobs:
         uses: issue-ops/semver@v1.0.0
         with:
           manifest-path: react/package.json
-          workspace: ${{ github.workspace }}/react
+          workspace: ${{ github.workspace }}/HealGuard
           ref: main
      
       - name: Print version
