@@ -7,7 +7,6 @@ on:
       - closed
     branches:
       - main
-      - develop
       
 permissions:
   contents: write
@@ -31,7 +30,7 @@ jobs:
         id: tag-commit
         uses: issue-ops/semver@v1.0.0
         with:
-          manifest-path: /package.json
+          manifest-path: package.json
           workspace: ${{ github.workspace }}/HealGuard
           ref: main
      
