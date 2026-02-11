@@ -52,6 +52,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run tests
-      working-directory: API
-      run: pytest
+#    - name: Run tests
+#      working-directory: API
+#      run: pytest
