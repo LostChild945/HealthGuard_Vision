@@ -1,4 +1,8 @@
+API/venv/
+.env
+.idea
+HealGuard/.env
+node_modules
 API/ML/data
 API/ML/.venv
 venv/
-.idea/
