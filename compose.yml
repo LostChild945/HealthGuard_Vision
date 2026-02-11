@@ -1,0 +1,11 @@
+services:
+  diabetes:
+    build: API/ML
+    command: bash -c "/opt/venv/bin/python diabete.py"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
