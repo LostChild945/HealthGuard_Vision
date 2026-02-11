@@ -31,7 +31,7 @@ jobs:
         id: tag-commit
         uses: issue-ops/semver@v1.0.0
         with:
-          manifest-path: react/package.json
+          manifest-path: /package.json
           workspace: ${{ github.workspace }}/HealGuard
           ref: main
      
