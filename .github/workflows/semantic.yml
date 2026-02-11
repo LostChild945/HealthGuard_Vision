@@ -2,9 +2,7 @@ name: semantic
 
 on:
   workflow_dispatch:
-  pull_request:
-    types:
-      - closed
+  push:
     branches:
       - main
       
@@ -15,8 +13,6 @@ jobs:
   release:
     name: Release Version
     runs-on: ubuntu-latest
-
-    if: ${{ github.event.pull_request.merged == true }}
     
     steps:
       - name: Checkout
@@ -26,16 +22,20 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
       
-      - name: Tag React Commit
-        id: tag-commit
-        uses: issue-ops/semver@v1.0.0
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          manifest-path: package.json
-          workspace: ${{ github.workspace }}/HealGuard
-          ref: main
-     
-      - name: Print version
-        run: echo ${{ steps.tag-commit.outputs.version }}
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./HealGuard
+        run: npm ci
+
+      - name: Run semantic-release
+        working-directory: ./HealGuard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
 
 
       
