@@ -1,2 +1,3 @@
-venv/
+API/venv/
 .idea/
+.env
