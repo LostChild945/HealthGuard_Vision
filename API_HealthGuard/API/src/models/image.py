@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Integer, DateTime, LargeBinary
 from sqlalchemy.orm import relationship
-from pgvector.sqlalchemy import VECTOR
 from datetime import datetime
 from database.database import Base
 
@@ -15,3 +14,5 @@ class Image(Base):
 
     def __repr__(self):
         return f"<Image id={self.id}>"
+
+
