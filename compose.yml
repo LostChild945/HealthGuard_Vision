@@ -1,7 +1,13 @@
 services:
-  diabetes:
-    build: API/ML
-    command: bash -c "/opt/venv/bin/python diabete.py"
+  api:
+    build: API_HealthGuard/.
+    restart: always 
+    ports: 
+      - ${API_PORT}:${API_PORT}
+    env_file:
+      - .env
+    depends_on:
+      - db
     deploy:
       resources:
         reservations:
@@ -9,3 +15,37 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
+    networks:
+      - healthguard_network
+
+  db:
+    image: pgvector/pgvector:${PGVECTOR_VERSION}
+    restart: always
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    ports:
+      - ${DATABASE_PORT}:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./API_HealthGuard/POSTGRES/vector_extension.sql:/docker-entrypoint-initdb.d/0-vector_extension.sql:ro
+    networks:
+      - healthguard_network
+
+  adminer:
+    image: adminer:${ADMINER_VERSION}
+    restart: always
+    ports:
+      - "${ADMINER_PORT}:8080"
+    depends_on:
+      - db
+    networks:  
+      - healthguard_network
+
+volumes:
+  postgres_data:
+
+networks:
+  healthguard_network: 
+    driver: bridge
