@@ -196,3 +196,17 @@ class SkinLesionAnalyzer:
     def __exit__(self, exc_type, exc_val, exc_tb):
         """Nettoyage automatique avec context manager"""
         self.unload_model()
+
+if __name__ == "__main__":
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Analyseur de lésions cutanées avec LLaVA")
+    parser.add_argument("--image", type=str, required=True, help="Chemin vers l'image de la lésion")
+    parser.add_argument("--model_id", type=str, default="YuchengShi/LLaVA-v1.5-7B-HAM10000", help="ID du modèle Hugging Face")
+    args = parser.parse_args()
+    
+    analyzer = SkinLesionAnalyzer(model_id=args.model_id)
+    result = analyzer.analyze(args.image)
+    
+    print("Diagnostic:", result["diagnosis"])
+    print("Type de lésion:", result["lesion_type"])
