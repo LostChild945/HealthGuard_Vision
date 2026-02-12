@@ -2,13 +2,12 @@ services:
   api:
     build: API_HealthGuard/.
     restart: always 
-    ports: "8000:8000" 
-    environment: 
-      DATABASE_USER: ${DATABASE_USER}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_PORT: ${DATABASE_PORT}
-    command: bash -c "/opt/venv/bin/python diabete.py"
+    ports: 
+      - ${API_PORT}:${API_PORT}
+    env_file:
+      - .env
+    depends_on:
+      - db
     deploy:
       resources:
         reservations:
@@ -20,25 +19,25 @@ services:
       - healthguard_network
 
   db:
-    image: pgvector/pgvector:pg17
+    image: pgvector/pgvector:${PGVECTOR_VERSION}
     restart: always
     environment:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
     ports:
-      - ${DATABASE_PORT}:${DATABASE_PORT}
+      - ${DATABASE_PORT}:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./postgres/vector_extension.sql:/docker-entrypoint-initdb.d/0-vector_extension.sql:ro
+      - ./API_HealthGuard/POSTGRES/vector_extension.sql:/docker-entrypoint-initdb.d/0-vector_extension.sql:ro
     networks:
       - healthguard_network
 
   adminer:
-    image: adminer:latest
+    image: adminer:${ADMINER_VERSION}
     restart: always
     ports:
-      - "5000:8080"
+      - "${ADMINER_PORT}:8080"
     depends_on:
       - db
     networks:  
