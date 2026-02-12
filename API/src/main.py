@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from database.database import engine
-from models.img import Base
+from models.image import Base
 from models.Analyse import Base
 
 app = FastAPI(title="HealthGuard Vision API")

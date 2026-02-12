@@ -11,7 +11,6 @@ class Analyse(Base):
     image_id = Column(Integer, ForeignKey("image.id", ondelete="CASCADE"))
     date = Column(DateTime, default=datetime.utcnow)
 
-    # relation avec Image
     image = relationship("Image", back_populates="analyses")
 
     def __repr__(self):
