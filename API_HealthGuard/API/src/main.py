@@ -1,6 +1,6 @@
 from database.database import engine
 from models.image import Base
-from models.Analyse import Base
+from models.analyse import Base
 from middleware.middleware import middleware_api_key
 from fastapi import FastAPI, UploadFile, File, Depends, HTTPException
 from sqlalchemy.orm import Session
