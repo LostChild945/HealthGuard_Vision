@@ -2,9 +2,9 @@ name: build
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main","develop" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   build-react:
@@ -18,7 +18,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
+
+      - name: Check Node version
+        run: node -v
+
 
       - name: Install dependencies
         working-directory: HealGuard
@@ -26,6 +30,28 @@ jobs:
 
       - name: Build React app
         working-directory: HealGuard
-        run: npm run build
+        run: npm run build:web
 
+  build-python:
+    name: python
+    runs-on: ubuntu-latest
 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install dependencies
+      working-directory: API
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+#    - name: Run tests
+#      working-directory: API
+#      run: pytest

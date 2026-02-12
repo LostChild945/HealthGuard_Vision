@@ -1,0 +1,42 @@
+name: semantic
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      
+permissions:
+  contents: write
+  
+jobs:
+  release:
+    name: Release Version
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./HealGuard
+        run: npm ci
+
+      - name: Run semantic-release
+        working-directory: ./HealGuard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          
+        run: npx semantic-release
+
+
+      
