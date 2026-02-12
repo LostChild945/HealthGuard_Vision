@@ -1,8 +1,5 @@
-# Import SQLAlchemy's create_engine function
 import os
 from sqlalchemy import create_engine, event
-from sqlalchemy.orm import declarative_base
-from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from dotenv import load_dotenv
 
@@ -19,7 +16,7 @@ if not DATABASE_URL:
 if not SECRET_KEY:
     raise ValueError("ENCRYPTION_KEY non définie dans le .env")
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, echo=True)
 
 @event.listens_for(engine, "connect")
 def set_encryption_key(dbapi_connection, connection_record):
