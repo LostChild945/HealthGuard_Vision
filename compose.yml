@@ -19,7 +19,7 @@ services:
       - healthguard_network
 
   db:
-    image: pgvector/pgvector:${PGVECTOR_VERSION}
+    image: postgres:${POSTGRES_VERSION}
     restart: always
     environment:
       POSTGRES_USER: ${DATABASE_USER}
