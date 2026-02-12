@@ -14,3 +14,7 @@ API_HealthGuard/API/src/__pycache__
 API_HealthGuard/API/src/routes/__pycache__ 
 API_HealthGuard/API/src/models/__pycache__ 
 API_HealthGuard/API/src/database/__pycache__ 
+API_HealthGuard/API/src/utils/__pycache__ 
+API_HealthGuard/API/src/services/__pycache__ 
+API_HealthGuard/API/src/middleware/__pycache__ 
+API_HealthGuard/API/src/schema/__pycache__
