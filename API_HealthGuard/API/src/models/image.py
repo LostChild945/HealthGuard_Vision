@@ -8,7 +8,7 @@ class Image(Base):
     __tablename__ = "image"
 
     id = Column(Integer, primary_key=True, index=True)
-    embedding =  Column(LargeBinary, nullable=False)
+    data = Column(LargeBinary, nullable=False)
     date = Column(DateTime, default=datetime.utcnow)
 
     analyses = relationship("Analyse", back_populates="image", cascade="all, delete")
