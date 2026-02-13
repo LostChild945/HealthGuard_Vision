@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, DateTime, LargeBinary
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from database.database import Base
+from API.src.database.database import Base
 
 class Image(Base):
     __tablename__ = "image"
