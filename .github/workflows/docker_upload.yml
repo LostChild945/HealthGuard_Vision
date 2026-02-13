@@ -1,21 +1,28 @@
 name: docker_upload
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_run:
+    workflows: ["semantic"]
+    types:
+      - completed
 
 jobs:
   docker:
-    name: Push docker image
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: read
-
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get latest tag
+        id: tag
+        run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
 
       - uses: docker/setup-buildx-action@v2
 
@@ -30,5 +37,5 @@ jobs:
           file: ./ML/Dockerfile
           push: true
           tags: |
-            ylaurent915/healthguard_ml:${{ github.ref_name }}
+            ylaurent915/healthguard_ml:${{ steps.tag.outputs.TAG }}
             ylaurent915/healthguard_ml:latest
