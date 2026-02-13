@@ -1,9 +1,7 @@
 name: "lint"
 on:
-  pull_request:
-    branches: [ "main", "develop" ]
   push:
-    branches: [ "develop" ]
+    branches: [ "main","develop" ]
 
 jobs:
   reactlint:
