@@ -143,8 +143,8 @@ class AnemiaAnalyzer:
                 'prediction': pred_class,
                 'confidence': round(conf_score * 100, 2),
                 'probabilities': {
-                    'sain': round(probs[0] * 100, 2),
-                    'anemie': round(probs[1] * 100, 2)
+                    'sain': round(float(probs[0]) * 100, 2),
+                    'anemie': round(float(probs[1]) * 100, 2)
                 },
                 'result': result_text
             }
