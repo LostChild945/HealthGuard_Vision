@@ -15,4 +15,4 @@ RUN python -m venv /opt/venv \
 COPY . .
 
 # Utiliser shell form pour interpolation
-CMD /opt/venv/bin/uvicorn API.src.app:main --host 0.0.0.0 --port ${API_PORT}
+CMD /opt/venv/bin/uvicorn API.src.main:app --host 0.0.0.0 --port ${API_PORT}

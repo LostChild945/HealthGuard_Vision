@@ -1,6 +1,6 @@
 import os
 from sqlalchemy import create_engine, event
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import sessionmaker, declarative_base
 from dotenv import load_dotenv
 
 Base = declarative_base()
@@ -16,7 +16,7 @@ if not DATABASE_URL:
 if not SECRET_KEY:
     raise ValueError("ENCRYPTION_KEY non définie dans le .env")
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, echo=True)
 
 @event.listens_for(engine, "connect")
 def set_encryption_key(dbapi_connection, connection_record):
@@ -24,4 +24,11 @@ def set_encryption_key(dbapi_connection, connection_record):
     cursor.execute("SET my.encryption_key = %s", (SECRET_KEY,))
     cursor.close()
 
-print("Engine PostgreSQL initialisé avec clé de chiffrement session.")
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
