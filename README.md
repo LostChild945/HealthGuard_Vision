@@ -111,6 +111,7 @@ npx expo start
 - [Documentation API](API_HealthGuard/API/README.md)
 - [Documentation ML](API_HealthGuard/ML/README.md)
 - [Documentation Frontend](HealGuard/README.md)
+- [Lien gestion de projet](https://sleepy-cart-f71.notion.site/Gestion-de-projet-19d4d62f1fee804dbb4dd28dccbc7521?source=copy_link)
 
 ---
 
