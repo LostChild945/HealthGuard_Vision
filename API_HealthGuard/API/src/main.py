@@ -18,8 +18,8 @@ async def upload_image(
     db: Session = Depends(get_db)
 ):
     results = []
-    total_sain = []
-    total_anemie = []
+    total_sain = 0.0
+    total_anemie = 0.0
     for file in files:
         if not file.content_type.startswith("image/"):
             raise HTTPException(status_code=400, detail="Le fichier doit être une image")
@@ -41,8 +41,8 @@ async def upload_image(
         db.refresh(result_anemia_sql)
 
     for r in results:
-        total_sain += r.probabilities["sain"]
-        total_anemie += r.probabilities["anemie"]
+        total_sain += r["probabilities"]["sain"]
+        total_anemie += r["probabilities"]["anemie"]
 
     moyenne_sain = total_sain / len(results)
     moyenne_anemie = total_anemie / len(results)
