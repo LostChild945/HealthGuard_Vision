@@ -89,8 +89,7 @@ Le `PhotoContext` fournit :
 ```json
 POST /upload
 {
-  "key": "API_KEY",
-  "imgs": ["uri1", "uri2", ...]
+  "files": ["uri1", "uri2", ...]
 }
 ```
 
@@ -98,9 +97,7 @@ POST /upload
 
 ```json
 {
-  "reponse": {
-    "message": "Résultat de l'analyse"
-  }
+    "results": "Résultat de l'analyse"
 }
 ```
 
