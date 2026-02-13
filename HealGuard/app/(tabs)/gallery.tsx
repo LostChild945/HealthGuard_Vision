@@ -11,32 +11,70 @@ export default function GalleryScreen() {
   const { photos, removePhoto, clearPhotos } = usePhotos();
   const [loading, setLoading] = useState(false);
 
-  const handleUpload = async () => {
-    if (photos.length === 0) {
-      if (Platform.OS !== 'web') {
-        Alert.alert('Erreur', 'Veuillez prendre au moins une photo');
-      }
-      return;
-    }
+  // const handleUpload = async () => {
+  //   if (photos.length === 0) {
+  //     if (Platform.OS !== 'web') {
+  //       Alert.alert('Erreur', 'Veuillez prendre au moins une photo');
+  //     }
+  //     return;
+  //   }
+  //
+  //   setLoading(true);
+  //   try {
+  //     const imageUris = photos.map((photo) => photo.uri);
+  //     const response = await photoUploadService.uploadPhotos(imageUris);
+  //
+  //     router.push({
+  //       pathname: '/results',
+  //       params: { message: response.result },
+  //     });
+  //   } catch (error) {
+  //     console.error('Upload error:', error);
+  //     if (Platform.OS !== 'web') {
+  //       Alert.alert('Erreur', "Impossible d\'envoyer les photos. Vérifiez votre connexion.");
+  //     }
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
-    setLoading(true);
-    try {
-      const imageUris = photos.map((photo) => photo.uri);
-      const response = await photoUploadService.uploadPhotos(imageUris);
+    const handleUpload = async () => {
+        if (photos.length === 0) {
+            if (Platform.OS !== 'web') {
+                Alert.alert('Erreur', 'Veuillez prendre au moins une photo');
+            }
+            return;
+        }
 
-      router.push({
-        pathname: '/results',
-        params: { message: response.reponse.message },
-      });
-    } catch (error) {
-      console.error('Upload error:', error);
-      if (Platform.OS !== 'web') {
-        Alert.alert('Erreur', "Impossible d\'envoyer les photos. Vérifiez votre connexion.");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+        setLoading(true);
+
+        try {
+            const imageUris = photos.map((photo) => photo.uri);
+            const response = await photoUploadService.uploadPhotos(imageUris);
+
+            // 🔥 POP-UP avec le résultat
+            if (Platform.OS !== 'web') {
+                Alert.alert(
+                    'Résultat de l’analyse',
+                    response.result,
+                    [{ text: 'OK' }]
+                );
+            } else {
+                alert(response.result); // pour le web
+            }
+
+        } catch (error) {
+            console.error('Upload error:', error);
+            if (Platform.OS !== 'web') {
+                Alert.alert(
+                    'Erreur',
+                    "Impossible d'envoyer les photos. Vérifiez votre connexion."
+                );
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
 
   const handleRemove = (id: string) => {
     removePhoto(id);

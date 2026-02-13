@@ -1,12 +1,9 @@
 export interface UploadPayload {
-  key: string;
-  imgs: string[];
+  files: string[];
 }
 
 export interface ApiResponse {
-  reponse: {
-    message: string;
-  };
+    result: string;
 }
 
 export interface Photo {
